@@ -1,7 +1,12 @@
 import pygame
+import random
+pygame.init()
 
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption("Side Scroller Game")
+font = pygame.font.Font(None, 50)
+text_surface = font.render("0", True, "white")
+text_rect = text_surface.get_rect(center=(275, 150))
 
 
 #the menu starts the game 
@@ -21,6 +26,7 @@ def menu():
 
 #game function called by menu
 def game():
+    numbers = ['assets/zero.png', 'assets/one.png', 'assets/two.png', 'assets/three.png', 'assets/four.png', 'assets/five.png']
     image = pygame.image.load('assets\\background.png')
     image = pygame.transform.scale(image, (640, 480))
     bgx = 0
@@ -30,11 +36,14 @@ def game():
     gravity = .75
     jumpcount = 0
     jump = 0
-
+    addend1 = random.randint(0, 10)
+   
     while True:
         screen.blit(image,(bgx-640,0))
         screen.blit(image, (bgx, 0))
         screen.blit(image, (bgx+640, 0))
+        text_surface = font.render("Target: " + str(addend1), True, "white")
+        screen.blit(text_surface, text_rect)
 
         bgx = bgx - 0.25
         if bgx <= -640:
